@@ -222,8 +222,7 @@ public class frmDangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btThoatActionPerformed
 
     private void jbtDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDangNhapActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:      
         String strUsername = txtTenDangNhap.getText().trim();
         String strPassword = String.valueOf(txtMatKhau.getText()).trim();
          String cautruyvan="select * from dangkitaikhoankhachhang where TenDangNhap= '"+strUsername+"' and MatKhau= '"+strPassword+"'";

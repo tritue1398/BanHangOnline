@@ -58,6 +58,7 @@ public class frmThemSanPham extends javax.swing.JFrame {
         btQuayLaiTrangChu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Thêm sản phẩm");
 
         lbMaSanPham.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbMaSanPham.setText("Mã sản phẩm:");
@@ -171,7 +172,7 @@ public class frmThemSanPham extends javax.swing.JFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(16, 74, Short.MAX_VALUE)
+                .addGap(16, 69, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(lbMaSanPham)
@@ -195,7 +196,7 @@ public class frmThemSanPham extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtGiaSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(379, 379, 379)
@@ -263,29 +264,28 @@ public class frmThemSanPham extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btQuayLaiTrangChu)
-                            .addComponent(btVeMacDinh))
-                        .addContainerGap())))
+                            .addComponent(btVeMacDinh)))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 931, Short.MAX_VALUE)
+            .addGap(0, 941, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addContainerGap()
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addGap(0, 641, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addContainerGap()
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -294,19 +294,11 @@ public class frmThemSanPham extends javax.swing.JFrame {
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
         String MaSanPham, TenSanPham,Size,GiaSanPham, MoTaSanPham;
-        // String ngay,thang,nam;
         MaSanPham = txtMaSanPham.getText();
         TenSanPham = txtTenSanPham.getText();
         Size=txtSize.getText();
         GiaSanPham = txtGiaSanPham.getText();
-        //ngay = cbbNgay.getSelectedItem().toString();
-        // thang = cbbThang.getSelectedItem().toString();
-        //nam = cbbNam.getSelectedItem().toString();
-        //NgaySanPham = nam + "-" + thang + "-" + ngay;
-        // SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
-        //NgaySanPham = dcn.format(jdtNgay.getDate().toString());
-
-        //  NgaySanPham=jdtNgay.toString();
+      
         MoTaSanPham=txtMoTa.getText();
         String cautruyvan = "insert into product "
         + "values(N'" + MaSanPham + "','" + TenSanPham + "','" + Size + "','" + GiaSanPham + "','" + MoTaSanPham+ "')";
@@ -506,6 +498,7 @@ public class frmThemSanPham extends javax.swing.JFrame {
         } else {
             System.out.println("Thất Bại");
         }
+        JOptionPane.showMessageDialog(null, "Sửa thành công!");
         LayDuLieuSanPham("1");
     }//GEN-LAST:event_btLuuActionPerformed
 

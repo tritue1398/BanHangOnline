@@ -10,7 +10,7 @@ import frm.frmDangNhap;
 import frm.frmThemSanPham;
 import java.sql.ResultSet;
 /**
- *
+ *o
  * @author Tri Tue
  */
 public class Main {
