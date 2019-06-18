@@ -8,6 +8,7 @@ package main_java;
 import frm.frmTrangChu;
 import frm.frmDangNhap;
 import frm.frmThemSanPham;
+import frm.frmNhanVien;
 import java.sql.ResultSet;
 /**
  *o
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
  */
 public class Main {
     public static  frm.frmTrangChu frmCT=new frmTrangChu();
+    public static  frm.frmNhanVien frmNV=new frmNhanVien();
      public static DataBase.DAO connection = new DataBase.DAO();
    public static frm.frmThemSanPham frmTSP=new frmThemSanPham();
     public static void main(String[]args){

@@ -147,9 +147,17 @@ public class frmHoaDon extends javax.swing.JFrame {
         String cautruyvan = "";
         cautruyvan = "delete from giohang";
         Main.connection.ExcuteQueryUpdateDB(cautruyvan);
+         String cautruyvan1 = "";
+        //cautruyvan1 = "insert into xacnhan(MaKhachHang) "
+               // + "select MaKhachHang from dangkitaikhoankhachhang where MaKhachHang=(select MaKhachHang from dangkitaikhoankhachhang,userkhachhang where dangkitaikhoankhachhang.TenDangNhap=userkhachhang.TenDangNhap)";
+       // Main.connection.ExcuteQueryUpdateDB(cautruyvan1);
       //  String cautruyvan1="";
         //  cautruyvan1 = "delete from userkhachhang";
        // Main.connection.ExcuteQueryUpdateDB(cautruyvan1);
+        cautruyvan1 ="update cthd set MaKhachHang=(select MaKhachHang from userkhachhang,dangkitaikhoankhachhang" +
+"               where dangkitaikhoankhachhang.TenDangNhap=userkhachhang.TenDangNhap)";
+        Main.connection.ExcuteQueryUpdateDB(cautruyvan1);
+       
         frmTrangChu frmTC=new frmTrangChu();
         frmTC.show();
         this.dispose(); 

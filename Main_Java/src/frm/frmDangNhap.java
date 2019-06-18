@@ -80,6 +80,7 @@ public class frmDangNhap extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtTenDangNhap = new javax.swing.JTextField();
         txtMatKhau = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -100,7 +101,7 @@ public class frmDangNhap extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 0, 0));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel1.setText("KHÁCH HÀNG ĐĂNG NHẬP");
+        jLabel1.setText("ĐĂNG NHẬP");
 
         btThoat.setText("Thoát");
         btThoat.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +172,8 @@ public class frmDangNhap extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
+        jLabel4.setText("(*) Liên hệ admin để được cấp quyền cao hơn!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,11 +193,17 @@ public class frmDangNhap extends javax.swing.JFrame {
                         .addComponent(btThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jLabel1)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(127, 127, 127))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(61, 61, 61))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +219,9 @@ public class frmDangNhap extends javax.swing.JFrame {
                     .addComponent(jbtDangNhap)
                     .addComponent(btDangKi)
                     .addComponent(btThoat))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,7 +236,7 @@ public class frmDangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:      
         String strUsername = txtTenDangNhap.getText().trim();
         String strPassword = String.valueOf(txtMatKhau.getText()).trim();
-         String cautruyvan="select * from dangkitaikhoankhachhang where TenDangNhap= '"+strUsername+"' and MatKhau= '"+strPassword+"'";
+         String cautruyvan="select * from user where TenDangNhap= '"+strUsername+"' and MatKhau= '"+strPassword+"'";
           ResultSet rs= main_java.Main.connection.ExcuteQueryGetTable(cautruyvan);
           String luumk="",luutdn="";
            if(jcbNhoMatKhau.isSelected())
@@ -250,7 +261,9 @@ public class frmDangNhap extends javax.swing.JFrame {
             bw.write(luutdn+"\n"+luumk);
             bw.close();
  if( jcbNhoMatKhau.isSelected())
-     
+            // cautruyvan = "delete from giohang where MaKhachHang not in( select MaKhachHang from cthd,dangkitaikhoankhachhang"
+                                                               //     + "where cthd.MaKhachHang=dangkitaikhoankhachhang.MaKhachHang";
+      //  Main.connection.ExcuteQueryUpdateDB(cautruyvan);
             System.out.println("Đăng nhập thành công");
         } catch (IOException e) {
             e.printStackTrace();
@@ -263,7 +276,11 @@ public class frmDangNhap extends javax.swing.JFrame {
             Main.connection.ExcuteQueryUpdateDB(ctv1);
            main_java.Main.frmCT.show();
             this.dispose();
-        } else {
+        } else if(KiemTraNhanVien(strUsername, strPassword)){
+                      main_java.Main.frmNV.show();
+                      this.dispose();
+        } 
+        else {
             ThongBao("Bạn nhập sai tài khoản hoặc mật khẩu", "Lỗi đăng nhập", 2);
         }
     
@@ -272,8 +289,8 @@ public class frmDangNhap extends javax.swing.JFrame {
        
      private boolean KiemTra(String tdn, String mk) {
         boolean kq = false;
-
-        String cautruyvan = "select * from dangkitaikhoankhachhang where TenDangNhap= '" + tdn + "' and MatKhau= '" + mk + "'";
+        int quyen=1;
+        String cautruyvan = "select * from user where TenDangNhap= '" + tdn + "' and MatKhau= '" + mk + "' and quyen= '" + quyen + "'";
         System.out.println(cautruyvan);
         ResultSet rs = main_java.Main.connection.ExcuteQueryGetTable(cautruyvan);
 
@@ -291,7 +308,27 @@ public class frmDangNhap extends javax.swing.JFrame {
 
         return kq;
     }
-     
+     private boolean KiemTraNhanVien(String tdn, String mk) {
+        boolean kq = false;
+        int quyen=2;
+        String cautruyvan = "select * from user where TenDangNhap= '" + tdn + "' and MatKhau= '" + mk + "' and quyen= '" + quyen + "'";
+        System.out.println(cautruyvan);
+        ResultSet rs = main_java.Main.connection.ExcuteQueryGetTable(cautruyvan);
+
+        try {
+            if (rs.next()) {
+                kq = true;
+                
+                ten=rs.getString("MaNhanVien");
+                user=rs.getString("TenDangNhap");
+               
+            }
+        } catch (SQLException ex) {
+            System.out.println("lỗi đăng nhập");
+        }
+
+        return kq;
+    }
         
     private void btDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangKiActionPerformed
         // TODO add your handling code here:
@@ -350,6 +387,7 @@ public class frmDangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbtDangNhap;

@@ -337,6 +337,11 @@ public class frmDangKiNhanVien extends javax.swing.JFrame {
                     + "values(N'" + MaNhanVien + "','" + TenNhanVien + "','" + GioiTinh + "','" + SDT + "','" + TenDangNhap + "','" + MatKhau + "')";
                     System.out.println(cautruyvan);
                     Main.connection.ExcuteQueryUpdateDB(ctv);
+                    int quyen=2;
+                   String ctv1 = "insert into user "
+        + "values(N'" + TenDangNhap + "','" + MatKhau  + "','" + quyen +"')";
+        System.out.println(cautruyvan);
+            Main.connection.ExcuteQueryUpdateDB(ctv1);
                     JOptionPane.showMessageDialog(null,"Đã đăng kí thành công" );
                       frmTrangChu frmTC=new frmTrangChu();
                       frmTC.show();

@@ -282,11 +282,14 @@ public class frmDangKiKhachHang extends javax.swing.JFrame {
         + "values(N'" + MaKhachHang + "','" + HoTen + "','" + SDT + "','" + DiaChi + "','" + TenDangNhap + "','" + MatKhau + "')";
         System.out.println(cautruyvan);
             Main.connection.ExcuteQueryUpdateDB(ctv);
+             int quyen=1;
+                   String ctv1 = "insert into user "
+        + "values(N'" + TenDangNhap + "','" + MatKhau  + "','" + quyen +"')";
+        System.out.println(cautruyvan);
+            Main.connection.ExcuteQueryUpdateDB(ctv1);
+            
             JOptionPane.showMessageDialog(null,"Đã đăng kí thành công" );
-            frmTrangChu frmTC=new frmTrangChu();
-            frmTC.show();
-            this.dispose();
-           // System.out.println("Đã đăng kí thành công");
+           
         } else {
                     JOptionPane.showMessageDialog(null,"Đăng kí thất bại" );
             //ThongBao("Không thể Thêm tài Khoản", "lỗi", 2);
